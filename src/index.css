@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+  --color-blue: #315EAE;
+  --color-blue-800: #244a8c;
+  --color-cream: #F4F0E8;
+  --color-soft-yellow: #F5D98A;
+
+  --font-heading: "Baloo 2", sans-serif;
+  --font-body: "Poppins", sans-serif;
+}

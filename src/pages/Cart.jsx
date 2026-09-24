@@ -1,92 +1,70 @@
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Trash2, Plus, Minus } from 'lucide-react';
+import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
 import { useCartStore } from '../store';
 
 export default function Cart() {
-  const { cart, updateQty, totalItems, totalPrice } = useCartStore();
-  const itemsCount = totalItems();
-  const totalCost = totalPrice();
+  const { cart, removeFromCart, updateQuantity, totalPrice } = useCartStore();
 
   if (cart.length === 0) {
     return (
-      <div className="animate-in fade-in flex flex-col items-center justify-center py-20 text-center">
-        <div className="text-6xl text-blue/20 mb-4"><ShoppingCart size={64} /></div>
-        <h2 className="font-heading text-2xl font-bold text-neutral-800 mb-2">your cart is feeling lonely...</h2>
-        <p className="text-neutral-500 mb-6">go find something yummy ♡</p>
-        <Link to="/" className="bg-blue text-white font-heading font-semibold px-8 py-3 rounded-full hover:bg-blue-800 transition-all">
-          Shop now
+      <div className="flex flex-col items-center justify-center min-h-[60vh] animate-in fade-in duration-500 text-center">
+        <div className="w-24 h-24 bg-tutus-yellow/30 text-tutus-blue rounded-full flex items-center justify-center mb-6">
+          <ShoppingBag size={40} strokeWidth={2} />
+        </div>
+        <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 mb-2">Your bag is empty.</h2>
+        <p className="text-gray-500 mb-8 font-medium">Let's find something magical for you.</p>
+        <Link to="/" className="bg-tutus-blue text-white px-8 py-3.5 rounded-full font-semibold hover:bg-tutus-blue/90 transition-all active:scale-95 shadow-md shadow-tutus-blue/20">
+          Continue Shopping
         </Link>
       </div>
     );
   }
 
   return (
-    <div className="animate-in fade-in duration-500">
-      <div className="pb-8 pt-4">
-        <h1 className="font-heading text-3xl font-bold text-neutral-900">Your little cart</h1>
+    <div className="animate-in fade-in duration-500 max-w-3xl mx-auto">
+      <div className="mb-8 pt-4">
+        <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">Review your bag.</h1>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-8 items-start pb-16">
-        
-        {/* Cart Items List */}
-        <div className="flex flex-col gap-4">
-          {cart.map((item) => (
-            <div key={item.id} className="bg-white rounded-2xl p-4 shadow-sm border-2 border-neutral-100 flex items-center gap-4">
-              <div className="w-20 h-20 shrink-0 bg-gradient-to-br from-soft-yellow to-cream rounded-xl flex items-center justify-center text-3xl">
+      <div className="bg-white rounded-[2rem] shadow-sm p-4 sm:p-6 mb-6">
+        <div className="flex flex-col gap-6">
+          {cart.map(item => (
+            <div key={item.id} className="flex items-center gap-4 py-2 border-b border-gray-100 last:border-0 last:pb-0">
+              <div className="w-20 h-20 bg-tutus-bg rounded-2xl flex items-center justify-center text-4xl flex-shrink-0">
                 {item.emoji}
               </div>
-              
               <div className="flex-1">
-                <h3 className="font-heading font-bold text-lg leading-tight">{item.name}</h3>
-                <div className="font-heading font-bold text-blue mt-1">
-                  Rp{item.price.toLocaleString('id-ID')}
-                </div>
-                
-                <div className="flex items-center gap-3 mt-3">
-                  <button onClick={() => updateQty(item.id, -1)} className="w-8 h-8 rounded-full bg-cream border-2 border-blue/20 flex items-center justify-center text-blue hover:bg-soft-yellow transition-colors">
-                    <Minus size={14} />
-                  </button>
-                  <span className="font-bold min-w-[20px] text-center">{item.qty}</span>
-                  <button onClick={() => updateQty(item.id, 1)} className="w-8 h-8 rounded-full bg-cream border-2 border-blue/20 flex items-center justify-center text-blue hover:bg-soft-yellow transition-colors">
-                    <Plus size={14} />
-                  </button>
-                </div>
+                <h3 className="font-bold text-lg text-gray-900">{item.name}</h3>
+                <div className="font-medium text-gray-500 mt-1">Rp{item.price.toLocaleString('id-ID')}</div>
               </div>
-
-              <div className="flex flex-col items-end gap-3 self-stretch justify-between">
-                <div className="font-heading font-bold text-lg">
-                  Rp{(item.price * item.qty).toLocaleString('id-ID')}
-                </div>
-                <button 
-                  onClick={() => updateQty(item.id, -item.qty)} 
-                  className="text-neutral-400 hover:text-red-500 transition-colors flex items-center gap-1 text-sm underline underline-offset-2"
-                >
-                  <Trash2 size={14} /> Remove
+              
+              <div className="flex items-center gap-3 bg-tutus-bg rounded-full p-1.5">
+                <button onClick={() => updateQuantity(item.id, -1)} className="w-8 h-8 flex items-center justify-center rounded-full bg-white shadow-sm text-gray-600 hover:text-tutus-blue active:scale-95 transition-all">
+                  {item.qty === 1 ? <Trash2 size={16} className="text-red-500" /> : <Minus size={16} />}
+                </button>
+                <span className="font-semibold text-gray-900 w-4 text-center">{item.qty}</span>
+                <button onClick={() => updateQuantity(item.id, 1)} className="w-8 h-8 flex items-center justify-center rounded-full bg-white shadow-sm text-gray-600 hover:text-tutus-blue active:scale-95 transition-all">
+                  <Plus size={16} />
                 </button>
               </div>
             </div>
           ))}
         </div>
+      </div>
 
-        {/* Order Summary Sidebar */}
-        <aside className="bg-white rounded-2xl shadow-sm border-2 border-neutral-100 p-6 sticky top-28">
-          <h2 className="font-heading text-xl font-bold mb-4">Summary</h2>
-          
-          <div className="flex justify-between items-center py-3 border-b border-neutral-100 text-neutral-600">
-            <span>Total items</span>
-            <span className="font-medium">{itemsCount} items</span>
-          </div>
-          
-          <div className="flex justify-between items-center py-4 text-lg">
-            <span className="font-heading font-bold text-neutral-900">Total</span>
-            <span className="font-heading font-bold text-blue">Rp{totalCost.toLocaleString('id-ID')}</span>
-          </div>
-
-          <Link to="/checkout" className="mt-4 w-full block text-center bg-blue text-white font-heading font-semibold py-3 rounded-full hover:bg-blue-800 active:scale-[0.98] transition-all">
-            Continue to checkout
+      <div className="bg-white rounded-[2rem] shadow-sm p-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div>
+          <p className="text-sm text-gray-500 font-semibold mb-1 uppercase tracking-wider">Total</p>
+          <p className="text-3xl font-bold text-tutus-blue tracking-tight">Rp{totalPrice().toLocaleString('id-ID')}</p>
+        </div>
+        <div className="flex gap-3 w-full sm:w-auto">
+          <Link to="/" className="flex items-center justify-center px-6 py-3.5 rounded-full font-semibold text-gray-600 bg-tutus-bg hover:bg-gray-200 transition-colors flex-1 sm:flex-none">
+            Back
           </Link>
-        </aside>
-
+          <Link to="/checkout" className="flex items-center justify-center px-8 py-3.5 rounded-full font-semibold text-white bg-tutus-blue hover:bg-tutus-blue/90 active:scale-95 transition-all flex-1 sm:flex-none shadow-md shadow-tutus-blue/20">
+            Check Out
+          </Link>
+        </div>
       </div>
     </div>
   );

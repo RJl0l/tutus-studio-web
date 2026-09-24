@@ -1,11 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-blue: #315EAE;
-  --color-blue-800: #244a8c;
-  --color-cream: #F4F0E8;
-  --color-soft-yellow: #F5D98A;
+  /* Colors extracted from your Instagram graphics */
+  --color-tutus-blue: #22489C;
+  --color-tutus-yellow: #FEE492;
+  --color-tutus-bg: #F5F5F7; /* Apple's signature light gray background */
+}
 
-  --font-heading: "Baloo 2", sans-serif;
-  --font-body: "Poppins", sans-serif;
+body {
+  @apply bg-tutus-bg text-gray-900 antialiased font-sans;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

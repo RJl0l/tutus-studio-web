@@ -1,25 +1,23 @@
 @import "tailwindcss";
 
 @theme {
-  --color-kitchen-black: #0A0A0A;
-  --color-kitchen-charcoal: #141414;
-  --color-apron-blue: #1A2E4D;
-  --color-brass-gold: #C5A059;
-  --color-ticket-white: #F4F4F0;
-  --color-ticket-black: #111111;
+  --color-tutus-blue: #22489C;
+  --color-tutus-yellow: #FEE492;
+  --color-tutus-cream: #FDFBF7;
+  --color-tutus-paper: #FFFFFF;
 }
 
 body {
-  @apply bg-kitchen-black text-ticket-white antialiased;
+  @apply bg-tutus-cream text-tutus-blue antialiased selection:bg-tutus-yellow selection:text-tutus-blue;
 }
 
-/* Custom scrollbar for a sleeker feel */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0A0A0A; 
+  background: #FDFBF7; 
 }
 ::-webkit-scrollbar-thumb {
-  background: #333; 
+  background: #22489C;
+  border-radius: 4px;
 }

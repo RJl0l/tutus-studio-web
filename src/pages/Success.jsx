@@ -1,28 +1,36 @@
-import { useLocation, Link } from 'react-router-dom';
-import { CheckCircle2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Success() {
-  const location = useLocation();
-  const orderId = location.state?.orderId || 'TUT-XXXXXX-XXX';
-
   return (
-    <div className="min-h-[60vh] flex items-center justify-center animate-in zoom-in duration-500">
-      <div className="bg-white rounded-[2.5rem] shadow-sm p-10 max-w-md w-full text-center border border-gray-100">
-        <CheckCircle2 size={64} className="text-green-500 mx-auto mb-6" strokeWidth={1.5} />
-        <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 mb-3">Yay, it's ordered!</h1>
-        <p className="text-gray-500 font-medium mb-8">
-          Thank you for choosing us. We'll contact you shortly via WhatsApp to confirm delivery details.
-        </p>
+    <div className="min-h-[60vh] flex flex-col items-center justify-center animate-in zoom-in duration-700 text-center px-4">
+      
+      <div className="border border-brass-gold p-12 sm:p-16 relative bg-kitchen-charcoal shadow-2xl max-w-lg w-full">
+        {/* Decorative corner accents */}
+        <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-brass-gold -translate-x-1 -translate-y-1"></div>
+        <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-brass-gold translate-x-1 -translate-y-1"></div>
+        <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-brass-gold -translate-x-1 translate-y-1"></div>
+        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-brass-gold translate-x-1 translate-y-1"></div>
         
-        <div className="bg-tutus-bg rounded-2xl p-4 mb-8">
-          <p className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-1">Order ID</p>
-          <p className="font-mono font-bold text-lg text-tutus-blue">{orderId}</p>
-        </div>
+        <h1 className="font-black text-5xl sm:text-6xl tracking-tighter uppercase mb-4 text-ticket-white">
+          Order<br/>Fired.
+        </h1>
+        
+        <p className="font-mono text-sm tracking-widest uppercase text-brass-gold mb-8">
+          Ticket transmitted to the kitchen.
+        </p>
 
-        <Link to="/" className="inline-block w-full bg-tutus-blue text-white font-semibold py-4 rounded-full hover:bg-tutus-blue/90 active:scale-95 transition-all shadow-md shadow-tutus-blue/20">
-          Back to Shop
+        <div className="border-t border-white/10 pt-8 mb-10 text-left space-y-4">
+          <p className="font-mono text-xs tracking-widest uppercase text-white/60 leading-relaxed">
+            <span className="text-brass-gold font-bold">Status:</span> Pending Confirmation<br/><br/>
+            The brigade has received your ticket. Stand by for final verification and payment processing via WhatsApp. 
+          </p>
+        </div>
+        
+        <Link to="/" className="inline-block w-full font-mono text-xs font-bold tracking-widest uppercase bg-ticket-white text-ticket-black py-4 hover:bg-brass-gold transition-colors">
+          Return to Menu
         </Link>
       </div>
+      
     </div>
   );
 }

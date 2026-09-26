@@ -1,55 +1,55 @@
-import { useState } from 'react';
 import { useCartStore } from '../store';
 
 const products = [
-  { id: 'regal', name: 'Regal Dessert Cup', price: 10000, emoji: '🍮', desc: 'Soft cream & regal crumbs.' },
-  { id: 'matcha', name: 'Matcha Dessert Cup', price: 11000, emoji: '🍵', desc: 'Creamy matcha goodness.' },
-  { id: 'matcha-balls', name: 'Matcha Balls', price: 12000, emoji: '🍡', desc: 'Little matcha-coated bites.' },
-  { id: 'coffee', name: 'Coffee Cup', price: 12000, emoji: '☕', desc: 'Your little caffeine fix.' }
+  { id: 'regal', name: 'OG CHOCOLATE', price: 25000, desc: 'WHITE CHOC-WALNUT', code: 'ITM-01' },
+  { id: 'matcha', name: 'RED VELVET', price: 28000, desc: 'CREAM CHEESE CORE', code: 'ITM-02' },
+  { id: 'matcha-balls', name: 'BISCOFF CRUNCH', price: 20000, desc: 'WHITE CHOC + BISCUIT', code: 'ITM-03' },
+  { id: 'coffee', name: 'OREO MATCHA', price: 22000, desc: 'OREO CROWN', code: 'ITM-04' }
 ];
 
 export default function Shop() {
   const addToCart = useCartStore(state => state.addToCart);
-  const [addedId, setAddedId] = useState(null);
-
-  const handleAdd = (product) => {
-    addToCart(product);
-    setAddedId(product.id);
-    // Reset the button text back to normal after 1.2 seconds
-    setTimeout(() => setAddedId(null), 1200);
-  };
 
   return (
-    <div className="animate-in fade-in duration-500">
-      <div className="text-center pb-10 pt-4">
-        <h1 className="font-heading text-4xl font-bold text-neutral-900 mb-2">Hello, sweet thing!</h1>
-        <p className="text-neutral-600">pick something yummy</p>
+    <div className="animate-in fade-in duration-700">
+      
+      {/* The Editorial Hero Section */}
+      <div className="mb-20 border-b border-white/10 pb-12">
+        <h1 className="text-6xl sm:text-8xl font-black uppercase tracking-tighter leading-none mb-4">
+          Every Second<br/>Counts.
+        </h1>
+        <p className="font-mono text-brass-gold uppercase tracking-widest text-sm max-w-md">
+          Chaos to order. Unpolished preparation. Meticulous execution.
+        </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+      <div className="flex justify-between items-end mb-8 border-b border-white/10 pb-4">
+        <h2 className="font-mono text-lg tracking-widest uppercase">The Menu</h2>
+        <span className="font-mono text-xs text-white/50">SERVICE 01</span>
+      </div>
+
+      {/* The Minimalist Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10">
         {products.map(product => (
-          <article key={product.id} className="bg-white rounded-2xl border-2 border-blue/10 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-blue transition-all duration-200 flex flex-col overflow-hidden">
-            <div className="aspect-[4/3] bg-gradient-to-br from-soft-yellow to-cream flex items-center justify-center text-6xl">
-              {product.emoji}
+          <article 
+            key={product.id} 
+            className="bg-kitchen-black p-8 sm:p-12 group hover:bg-kitchen-charcoal transition-colors cursor-pointer flex flex-col justify-between min-h-[300px]"
+            onClick={() => addToCart(product)}
+          >
+            <div className="flex justify-between items-start mb-8">
+              <span className="font-mono text-xs text-white/40">{product.code}</span>
+              <span className="font-mono text-sm tracking-widest text-brass-gold">Rp{product.price.toLocaleString('id-ID')}</span>
             </div>
             
-            <div className="p-5 flex flex-col flex-1">
-              <h3 className="font-heading font-bold text-lg mb-1">{product.name}</h3>
-              <p className="text-sm text-neutral-500 mb-4 flex-1">{product.desc}</p>
-              <div className="font-heading font-bold text-blue text-lg mb-4">
-                Rp{product.price.toLocaleString('id-ID')}
+            <div>
+              <h3 className="font-black text-3xl sm:text-4xl uppercase tracking-tighter mb-2">{product.name}</h3>
+              <p className="font-mono text-sm text-white/60 uppercase">{product.desc}</p>
+            </div>
+
+            <div className="mt-12 overflow-hidden">
+              <div className="font-mono text-xs tracking-widest uppercase text-brass-gold translate-y-8 group-hover:translate-y-0 transition-transform duration-300">
+                [ + Add to Ticket ]
               </div>
-              
-              <button 
-                onClick={() => handleAdd(product)}
-                className={`w-full font-heading font-bold py-2.5 rounded-full transition-all duration-200 border-2 border-blue ${
-                  addedId === product.id 
-                    ? 'bg-blue text-white shadow-none translate-y-1' 
-                    : 'bg-cream text-blue shadow-[3px_3px_0_#315EAE] hover:bg-soft-yellow hover:-translate-y-0.5 hover:shadow-[5px_5px_0_#315EAE] active:translate-y-1 active:shadow-none'
-                }`}
-              >
-                {addedId === product.id ? 'Added! ♡' : 'Add to cart'}
-              </button>
             </div>
           </article>
         ))}

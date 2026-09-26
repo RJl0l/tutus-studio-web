@@ -1,14 +1,25 @@
 @import "tailwindcss";
 
 @theme {
-  /* Colors extracted from your Instagram graphics */
-  --color-tutus-blue: #22489C;
-  --color-tutus-yellow: #FEE492;
-  --color-tutus-bg: #F5F5F7; /* Apple's signature light gray background */
+  --color-kitchen-black: #0A0A0A;
+  --color-kitchen-charcoal: #141414;
+  --color-apron-blue: #1A2E4D;
+  --color-brass-gold: #C5A059;
+  --color-ticket-white: #F4F4F0;
+  --color-ticket-black: #111111;
 }
 
 body {
-  @apply bg-tutus-bg text-gray-900 antialiased font-sans;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  @apply bg-kitchen-black text-ticket-white antialiased;
+}
+
+/* Custom scrollbar for a sleeker feel */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0A0A; 
+}
+::-webkit-scrollbar-thumb {
+  background: #333; 
 }

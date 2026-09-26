@@ -11,23 +11,26 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div className="min-h-screen flex flex-col font-sans selection:bg-brass-gold selection:text-kitchen-black">
+      <div className="min-h-screen flex flex-col font-sans">
         
-        <header className="border-b border-white/10 sticky top-0 bg-kitchen-black/90 backdrop-blur-md z-50">
+        <header className="border-b-2 border-tutus-blue/10 sticky top-0 bg-tutus-cream/90 backdrop-blur-md z-50">
           <div className="max-w-5xl mx-auto px-6 h-20 flex items-center justify-between">
-            <Link to="/" className="flex flex-col">
-              <span className="font-black text-2xl tracking-tighter uppercase leading-none">Tutu's</span>
-              <span className="font-mono text-xs tracking-widest text-brass-gold">TANGERANG, ID</span>
+            <Link to="/" className="flex items-center gap-3">
+              <span className="text-3xl">🐱</span>
+              <div className="flex flex-col">
+                <span className="font-black text-xl tracking-tight uppercase leading-none">Tutu's Studio</span>
+                <span className="font-medium text-xs text-tutus-blue/60">MADE TO BE OBSESSED</span>
+              </div>
             </Link>
 
-            <Link to="/cart" className="flex items-center gap-3 group">
-              <span className="font-mono text-sm tracking-widest uppercase hidden sm:block group-hover:text-brass-gold transition-colors">
-                Order Ticket
+            <Link to="/cart" className="flex items-center gap-3 group bg-tutus-paper border-2 border-tutus-blue/10 px-4 py-2 rounded-full hover:border-tutus-blue transition-colors">
+              <span className="font-bold text-sm uppercase hidden sm:block">
+                Your Bag
               </span>
               <div className="relative">
-                <ShoppingBag size={20} className="group-hover:text-brass-gold transition-colors" />
+                <ShoppingBag size={20} className="text-tutus-blue" />
                 {totalItems > 0 && (
-                  <span className="absolute -top-2 -right-3 font-mono text-[10px] bg-ticket-white text-kitchen-black px-1.5 py-0.5 font-bold">
+                  <span className="absolute -top-2 -right-3 font-bold text-[10px] bg-tutus-yellow text-tutus-blue w-5 h-5 flex items-center justify-center rounded-full border border-tutus-blue">
                     {totalItems}
                   </span>
                 )}
@@ -45,9 +48,9 @@ export default function App() {
           </Routes>
         </main>
 
-        <footer className="border-t border-white/10 py-8 text-center">
-          <p className="font-mono text-xs tracking-widest text-white/40 uppercase">
-            © 2026 Tutu's Studio // Service 01
+        <footer className="py-8 text-center border-t-2 border-tutus-blue/10">
+          <p className="font-bold text-sm tracking-widest text-tutus-blue/40 uppercase">
+            ♡ Tutu's Studio ♡
           </p>
         </footer>
       </div>

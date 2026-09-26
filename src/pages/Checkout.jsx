@@ -31,76 +31,73 @@ export default function Checkout() {
   return (
     <div className="animate-in fade-in duration-500 max-w-2xl mx-auto">
       
-      {/* The Kitchen Order Ticket (KOT) */}
-      <div className="bg-ticket-white text-ticket-black p-8 sm:p-12 shadow-2xl relative">
-        {/* Ticket Header */}
-        <div className="border-b-2 border-ticket-black pb-6 mb-8 text-center">
-          <h1 className="font-black text-4xl tracking-tighter uppercase mb-2">Order Ticket</h1>
-          <p className="font-mono text-xs uppercase tracking-widest">Table: Web // Chk: {Math.floor(Math.random() * 9000) + 1000}</p>
+      <div className="bg-tutus-paper border-2 border-tutus-blue p-8 sm:p-12 shadow-xl rounded-[2rem] relative">
+        <div className="border-b-2 border-tutus-blue/20 pb-6 mb-8 text-center">
+          <h1 className="font-black text-3xl uppercase mb-2">Order Form 📝</h1>
+          <p className="font-bold text-xs uppercase tracking-widest text-tutus-blue/60">Fill out to confirm your treats</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="font-mono text-sm uppercase space-y-8">
+        <form onSubmit={handleSubmit} className="font-bold text-sm space-y-8">
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div className="flex flex-col gap-2">
-              <label className="tracking-widest font-bold">Client Name</label>
-              <input type="text" required onChange={e => setFormData({...formData, name: e.target.value})} className="bg-transparent border-b border-ticket-black py-2 focus:outline-none focus:border-brass-gold transition-colors" />
+              <label className="tracking-widest uppercase text-xs text-tutus-blue/70">Name</label>
+              <input type="text" required onChange={e => setFormData({...formData, name: e.target.value})} className="bg-tutus-cream border-2 border-tutus-blue/20 rounded-xl px-4 py-3 focus:outline-none focus:border-tutus-blue transition-colors" />
             </div>
             <div className="flex flex-col gap-2">
-              <label className="tracking-widest font-bold">Contact No.</label>
-              <input type="tel" required onChange={e => setFormData({...formData, contactNumber: e.target.value})} className="bg-transparent border-b border-ticket-black py-2 focus:outline-none focus:border-brass-gold transition-colors" />
+              <label className="tracking-widest uppercase text-xs text-tutus-blue/70">WhatsApp No.</label>
+              <input type="tel" required onChange={e => setFormData({...formData, contactNumber: e.target.value})} className="bg-tutus-cream border-2 border-tutus-blue/20 rounded-xl px-4 py-3 focus:outline-none focus:border-tutus-blue transition-colors" />
             </div>
             <div className="flex flex-col gap-2">
-              <label className="tracking-widest font-bold">Req. Date</label>
-              <input type="date" required onChange={e => setFormData({...formData, dateNeeded: e.target.value})} className="bg-transparent border-b border-ticket-black py-2 focus:outline-none" />
+              <label className="tracking-widest uppercase text-xs text-tutus-blue/70">Date Needed</label>
+              <input type="date" required onChange={e => setFormData({...formData, dateNeeded: e.target.value})} className="bg-tutus-cream border-2 border-tutus-blue/20 rounded-xl px-4 py-3 focus:outline-none focus:border-tutus-blue text-tutus-blue" />
             </div>
             <div className="flex flex-col gap-2">
-              <label className="tracking-widest font-bold">Req. Time</label>
-              <input type="time" required onChange={e => setFormData({...formData, timeNeeded: e.target.value})} className="bg-transparent border-b border-ticket-black py-2 focus:outline-none" />
+              <label className="tracking-widest uppercase text-xs text-tutus-blue/70">Time Needed</label>
+              <input type="time" required onChange={e => setFormData({...formData, timeNeeded: e.target.value})} className="bg-tutus-cream border-2 border-tutus-blue/20 rounded-xl px-4 py-3 focus:outline-none focus:border-tutus-blue text-tutus-blue" />
             </div>
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="tracking-widest font-bold">Service Type</label>
-            <select onChange={e => setFormData({...formData, deliveryMethod: e.target.value})} className="bg-transparent border-b border-ticket-black py-2 focus:outline-none cursor-pointer">
-              <option value="pick up">PICK UP (FRONT OF HOUSE)</option>
-              <option value="deliver">DELIVERY (EXTERNAL)</option>
+            <label className="tracking-widest uppercase text-xs text-tutus-blue/70">Deliver or Pick Up?</label>
+            <select onChange={e => setFormData({...formData, deliveryMethod: e.target.value})} className="bg-tutus-cream border-2 border-tutus-blue/20 rounded-xl px-4 py-3 focus:outline-none focus:border-tutus-blue cursor-pointer">
+              <option value="pick up">Pick Up</option>
+              <option value="deliver">Delivery</option>
             </select>
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="tracking-widest font-bold">Location Details</label>
-            <input type="text" onChange={e => setFormData({...formData, location: e.target.value})} className="bg-transparent border-b border-ticket-black py-2 focus:outline-none focus:border-brass-gold transition-colors" placeholder="IF DELIVERY..." />
+            <label className="tracking-widest uppercase text-xs text-tutus-blue/70">Location Details</label>
+            <input type="text" onChange={e => setFormData({...formData, location: e.target.value})} className="bg-tutus-cream border-2 border-tutus-blue/20 rounded-xl px-4 py-3 focus:outline-none focus:border-tutus-blue transition-colors" placeholder="If delivery..." />
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="tracking-widest font-bold">Payment Tender</label>
-            <select onChange={e => setFormData({...formData, paymentMethod: e.target.value})} className="bg-transparent border-b border-ticket-black py-2 focus:outline-none cursor-pointer">
-              <option value="cash">CASH ON HAND</option>
-              <option value="qris">DIGITAL QRIS</option>
-              <option value="transfer">BANK WIRE</option>
+            <label className="tracking-widest uppercase text-xs text-tutus-blue/70">Payment Method</label>
+            <select onChange={e => setFormData({...formData, paymentMethod: e.target.value})} className="bg-tutus-cream border-2 border-tutus-blue/20 rounded-xl px-4 py-3 focus:outline-none focus:border-tutus-blue cursor-pointer">
+              <option value="cash">Cash</option>
+              <option value="qris">QRIS</option>
+              <option value="transfer">Bank Transfer</option>
             </select>
           </div>
 
-          {/* Ticket Items Breakdown */}
-          <div className="border-t-2 border-ticket-black pt-6 mt-8">
-            <h2 className="tracking-widest font-bold mb-4">Itemized Breakdown</h2>
-            <div className="space-y-2 mb-6">
+          <div className="border-t-2 border-tutus-blue/20 pt-6 mt-8 bg-tutus-yellow/10 p-6 rounded-2xl">
+            <h2 className="tracking-widest uppercase text-xs text-tutus-blue/70 mb-4">Your Order</h2>
+            <div className="space-y-3 mb-6">
               {cart.map(item => (
-                <div key={item.id} className="flex justify-between items-end border-b border-ticket-black/20 pb-1">
-                  <span>{item.qty} x {item.name}</span>
+                <div key={item.id} className="flex justify-between items-end border-b border-tutus-blue/10 pb-2">
+                  <span>{item.qty}x {item.name}</span>
                   <span>Rp{(item.price * item.qty).toLocaleString('id-ID')}</span>
                 </div>
               ))}
             </div>
-            <div className="flex justify-between items-center text-lg font-bold">
-              <span>BALANCE DUE</span>
+            <div className="flex justify-between items-center text-xl font-black">
+              <span>TOTAL</span>
               <span>Rp{totalPrice().toLocaleString('id-ID')}</span>
             </div>
           </div>
 
-          <button type="submit" disabled={isSubmitting} className="w-full bg-ticket-black text-ticket-white py-4 mt-8 font-bold tracking-widest hover:bg-brass-gold hover:text-ticket-black transition-colors disabled:opacity-50">
-            {isSubmitting ? 'TRANSMITTING...' : 'FIRE ORDER'}
+          <button type="submit" disabled={isSubmitting} className="w-full bg-tutus-blue text-white py-4 mt-8 font-bold tracking-widest uppercase rounded-xl hover:bg-tutus-blue/90 active:scale-95 transition-all shadow-md disabled:opacity-50">
+            {isSubmitting ? 'Sending...' : 'Submit Order ♡'}
           </button>
         </form>
       </div>

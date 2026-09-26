@@ -1,43 +1,55 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import { Instagram, Facebook, Video } from 'lucide-react'; 
+import { ShoppingBag } from 'lucide-react';
+import { useCartStore } from './store';
 import Shop from './pages/Shop';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import Success from './pages/Success';
 
 export default function App() {
+  const totalItems = useCartStore(state => state.totalItems());
+
   return (
     <BrowserRouter>
-      <div className="min-h-screen py-8 px-4">
-        {/* Central White Container */}
-        <div className="max-w-3xl mx-auto bg-white/95 backdrop-blur-sm shadow-2xl rounded-3xl min-h-[90vh] flex flex-col overflow-hidden border-2 border-bakery-red/10">
-          
-          <header className="pt-8 pb-4 flex justify-center">
-            <Link to="/" className="w-24 h-24 bg-red-50 rounded-full flex items-center justify-center border-2 border-bakery-red shadow-sm">
-              <span className="text-4xl">🐱👨‍🍳</span>
+      <div className="min-h-screen flex flex-col font-sans selection:bg-brass-gold selection:text-kitchen-black">
+        
+        <header className="border-b border-white/10 sticky top-0 bg-kitchen-black/90 backdrop-blur-md z-50">
+          <div className="max-w-5xl mx-auto px-6 h-20 flex items-center justify-between">
+            <Link to="/" className="flex flex-col">
+              <span className="font-black text-2xl tracking-tighter uppercase leading-none">Tutu's</span>
+              <span className="font-mono text-xs tracking-widest text-brass-gold">TANGERANG, ID</span>
             </Link>
-          </header>
 
-          <main className="flex-1 px-6 sm:px-12 py-4">
-            <Routes>
-              <Route path="/" element={<Shop />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/success" element={<Success />} />
-            </Routes>
-          </main>
+            <Link to="/cart" className="flex items-center gap-3 group">
+              <span className="font-mono text-sm tracking-widest uppercase hidden sm:block group-hover:text-brass-gold transition-colors">
+                Order Ticket
+              </span>
+              <div className="relative">
+                <ShoppingBag size={20} className="group-hover:text-brass-gold transition-colors" />
+                {totalItems > 0 && (
+                  <span className="absolute -top-2 -right-3 font-mono text-[10px] bg-ticket-white text-kitchen-black px-1.5 py-0.5 font-bold">
+                    {totalItems}
+                  </span>
+                )}
+              </div>
+            </Link>
+          </div>
+        </header>
 
-          {/* Social Media Footer */}
-          <footer className="py-8 flex flex-col items-center gap-4">
-            <div className="flex items-center gap-6">
-              <a href="#" className="hover:scale-110 transition-transform"><Instagram size={24} /></a>
-              <a href="#" className="hover:scale-110 transition-transform"><Facebook size={24} /></a>
-              <a href="#" className="hover:scale-110 transition-transform"><Video size={24} /></a>
-            </div>
-            <p className="text-xs font-semibold tracking-widest uppercase">Click icons for socials and updates!</p>
-          </footer>
+        <main className="flex-1 w-full max-w-5xl mx-auto px-6 py-12">
+          <Routes>
+            <Route path="/" element={<Shop />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/success" element={<Success />} />
+          </Routes>
+        </main>
 
-        </div>
+        <footer className="border-t border-white/10 py-8 text-center">
+          <p className="font-mono text-xs tracking-widest text-white/40 uppercase">
+            © 2026 Tutu's Studio // Service 01
+          </p>
+        </footer>
       </div>
     </BrowserRouter>
   );

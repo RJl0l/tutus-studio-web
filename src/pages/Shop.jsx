@@ -4,7 +4,7 @@ const products = [
   { id: 'regal', name: 'OG Chocolate', price: 25000, desc: 'white choc-walnut', code: 'ITM-01', emoji: '🍪', isSoldOut: false },
   { id: 'matcha', name: 'Red Velvet', price: 28000, desc: 'cream cheese core', code: 'ITM-02', emoji: '🍰', isSoldOut: false },
   { id: 'matcha-balls', name: 'Biscoff Crunch', price: 20000, desc: 'white choc + biscuit', code: 'ITM-03', emoji: '🥨', isSoldOut: false },
-  { id: 'coffee', name: 'Oreo Matcha', price: 22000, desc: 'stuffed with oreo', code: 'ITM-04', emoji: '🍵', isSoldOut: true } // <-- Set to true to test the sold-out state!
+  { id: 'coffee', name: 'Oreo Matcha', price: 22000, desc: 'stuffed with oreo', code: 'ITM-04', emoji: '🍵', isSoldOut: false } // <-- Set to true to test the sold-out state!
 ];
 
 export default function Shop() {

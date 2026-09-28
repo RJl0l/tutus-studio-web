@@ -6,7 +6,7 @@ export default function Success() {
   const method = location.state?.method || 'cash';
   
   // Replace this with the Admin's WhatsApp number (include country code, no +)
-  const adminWhatsApp = "YOUR_WHATSAPP_NUMBER_HERE"; 
+  const adminWhatsApp = "6288211594854";
   const waMessage = encodeURIComponent(`Hello Tutu's Studio! Here is my payment proof for Order ID: ${orderId}.`);
   const waLink = `https://wa.me/${adminWhatsApp}?text=${waMessage}`;
 

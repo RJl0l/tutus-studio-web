@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { ShoppingBag, Store } from 'lucide-react';
 import { useCartStore } from './store';
@@ -8,6 +9,15 @@ import Success from './pages/Success';
 
 export default function App() {
   const totalItems = useCartStore(state => state.totalItems());
+  const [isBumping, setIsBumping] = useState(false);
+
+  // Trigger the animation whenever a new item drops into the bag
+  useEffect(() => {
+    if (totalItems === 0) return;
+    setIsBumping(true);
+    const timer = setTimeout(() => setIsBumping(false), 300);
+    return () => clearTimeout(timer);
+  }, [totalItems]);
 
   return (
     <BrowserRouter>
@@ -15,7 +25,6 @@ export default function App() {
         
         <header className="border-b-2 border-tutus-blue/10 sticky top-0 bg-tutus-cream/90 backdrop-blur-md z-50">
           <div className="max-w-5xl mx-auto px-6 h-20 flex items-center justify-between">
-            {/* Logo on the left */}
             <Link to="/" className="flex items-center gap-3">
               <span className="text-3xl">🐱</span>
               <div className="flex flex-col">
@@ -24,7 +33,6 @@ export default function App() {
               </div>
             </Link>
 
-            {/* Index Navigation on the right */}
             <nav className="flex items-center gap-4 sm:gap-6">
               <Link to="/" className="flex items-center gap-2 font-bold text-sm uppercase hover:text-tutus-blue/70 transition-colors">
                 <Store size={18} />
@@ -38,7 +46,7 @@ export default function App() {
                 <div className="relative">
                   <ShoppingBag size={20} className="text-tutus-blue" />
                   {totalItems > 0 && (
-                    <span className="absolute -top-2 -right-3 font-bold text-[10px] bg-tutus-yellow text-tutus-blue w-5 h-5 flex items-center justify-center rounded-full border border-tutus-blue shadow-sm">
+                    <span className={`absolute -top-2 -right-3 font-bold text-[10px] bg-tutus-yellow text-tutus-blue w-5 h-5 flex items-center justify-center rounded-full border border-tutus-blue shadow-sm transition-transform duration-300 ${isBumping ? 'scale-150 rotate-12' : 'scale-100'}`}>
                       {totalItems}
                     </span>
                   )}

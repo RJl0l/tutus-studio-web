@@ -1,10 +1,10 @@
 import { useCartStore } from '../store';
 
 const products = [
-  { id: 'regal', name: 'OG Chocolate', price: 25000, desc: 'white choc-walnut', code: 'ITM-01', emoji: '🍪' },
-  { id: 'matcha', name: 'Red Velvet', price: 28000, desc: 'cream cheese core', code: 'ITM-02', emoji: '🍰' },
-  { id: 'matcha-balls', name: 'Biscoff Crunch', price: 20000, desc: 'white choc + biscuit', code: 'ITM-03', emoji: '🥨' },
-  { id: 'coffee', name: 'Oreo Matcha', price: 22000, desc: 'stuffed with oreo', code: 'ITM-04', emoji: '🍵' }
+  { id: 'regal', name: 'OG Chocolate', price: 25000, desc: 'white choc-walnut', code: 'ITM-01', emoji: '🍪', isSoldOut: false },
+  { id: 'matcha', name: 'Red Velvet', price: 28000, desc: 'cream cheese core', code: 'ITM-02', emoji: '🍰', isSoldOut: false },
+  { id: 'matcha-balls', name: 'Biscoff Crunch', price: 20000, desc: 'white choc + biscuit', code: 'ITM-03', emoji: '🥨', isSoldOut: false },
+  { id: 'coffee', name: 'Oreo Matcha', price: 22000, desc: 'stuffed with oreo', code: 'ITM-04', emoji: '🍵', isSoldOut: true } // <-- Set to true to test the sold-out state!
 ];
 
 export default function Shop() {
@@ -26,12 +26,16 @@ export default function Shop() {
         {products.map(product => (
           <article 
             key={product.id} 
-            className="bg-tutus-paper border-2 border-tutus-blue/10 p-8 sm:p-10 rounded-[2rem] group hover:border-tutus-blue hover:bg-tutus-yellow/20 transition-all cursor-pointer flex flex-col justify-between min-h-[280px] shadow-sm"
-            onClick={() => addToCart(product)}
+            className={`bg-tutus-paper border-2 border-tutus-blue/10 p-8 sm:p-10 rounded-[2rem] flex flex-col justify-between min-h-[280px] shadow-sm transition-all ${
+              product.isSoldOut 
+                ? 'opacity-60 grayscale cursor-not-allowed' 
+                : 'group hover:border-tutus-blue hover:bg-tutus-yellow/20 cursor-pointer'
+            }`}
+            onClick={() => !product.isSoldOut && addToCart(product)}
           >
             <div className="flex justify-between items-start mb-6">
               <span className="font-mono text-xs text-tutus-blue/40 font-bold">{product.code}</span>
-              <span className="text-4xl group-hover:scale-110 transition-transform">{product.emoji}</span>
+              <span className={`text-4xl ${!product.isSoldOut && 'group-hover:scale-110 transition-transform'}`}>{product.emoji}</span>
             </div>
             
             <div>
@@ -39,10 +43,14 @@ export default function Shop() {
               <p className="font-medium text-sm text-tutus-blue/60 lowercase">{product.desc}</p>
             </div>
 
-            <div className="mt-8 flex justify-between items-center border-t-2 border-tutus-blue/5 pt-4 group-hover:border-tutus-blue/20 transition-colors">
+            <div className="mt-8 flex justify-between items-center border-t-2 border-tutus-blue/5 pt-4">
                <span className="font-bold text-lg">Rp{product.price.toLocaleString('id-ID')}</span>
-               <span className="font-bold text-sm tracking-widest uppercase bg-tutus-blue text-white px-4 py-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-                + Add
+               <span className={`font-bold text-xs tracking-widest uppercase px-4 py-2 rounded-full transition-opacity ${
+                 product.isSoldOut 
+                   ? 'bg-gray-200 text-gray-500 opacity-100' 
+                   : 'bg-tutus-blue text-white opacity-0 group-hover:opacity-100'
+               }`}>
+                {product.isSoldOut ? 'All Gone 💔' : '+ Add'}
               </span>
             </div>
           </article>

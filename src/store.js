@@ -1,24 +1,31 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
 
-export const useCartStore = create(
-  persist(
-    (set, get) => ({
-      cart: [],
-      addToCart: (product) => set((state) => {
-        const existing = state.cart.find(i => i.id === product.id);
-        if (existing) {
-          return { cart: state.cart.map(i => i.id === product.id ? { ...i, qty: i.qty + 1 } : i) };
+export const useCartStore = create((set, get) => ({
+  cart: [],
+  
+  addToCart: (product) => {
+    const { cart } = get();
+    const existingItem = cart.find(item => item.id === product.id);
+    if (existingItem) {
+      set({ cart: cart.map(item => item.id === product.id ? { ...item, qty: item.qty + 1 } : item) });
+    } else {
+      set({ cart: [...cart, { ...product, qty: 1 }] });
+    }
+  },
+
+  // This specific function powers the + and - buttons
+  updateQuantity: (id, change) => {
+    set({
+      cart: get().cart.map(item => {
+        if (item.id === id) {
+          return { ...item, qty: item.qty + change };
         }
-        return { cart: [...state.cart, { ...product, qty: 1 }] };
-      }),
-      updateQty: (id, delta) => set((state) => ({
-        cart: state.cart.map(i => i.id === id ? { ...i, qty: i.qty + delta } : i).filter(i => i.qty > 0)
-      })),
-      clearCart: () => set({ cart: [] }),
-      totalItems: () => get().cart.reduce((sum, i) => sum + i.qty, 0),
-      totalPrice: () => get().cart.reduce((sum, i) => sum + i.qty * i.price, 0),
-    }),
-    { name: 'tutus-cart' }
-  )
-);
+        return item;
+      }).filter(item => item.qty > 0) // Removes item if quantity drops to 0
+    });
+  },
+
+  totalItems: () => get().cart.reduce((total, item) => total + item.qty, 0),
+  totalPrice: () => get().cart.reduce((total, item) => total + (item.price * item.qty), 0),
+  clearCart: () => set({ cart: [] })
+}));

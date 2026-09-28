@@ -80,6 +80,43 @@ export default function Checkout() {
             </select>
           </div>
 
+          {/* --- CONDITIONAL PAYMENT BLOCKS --- */}
+          {formData.paymentMethod === 'qris' && (
+            <div className="flex flex-col gap-3 mt-4 bg-tutus-yellow/20 p-6 rounded-2xl border-2 border-tutus-yellow items-center text-center animate-in fade-in zoom-in-95">
+              <p className="font-black uppercase tracking-widest text-xs">Scan to Pay</p>
+              
+              {/* Replace this div with an actual <img> tag when you have your QR image */}
+              <div className="w-40 h-40 bg-white border-2 border-tutus-blue flex items-center justify-center text-5xl rounded-2xl mb-1 shadow-sm">
+                📱
+              </div>
+              
+              <p className="text-xs font-bold text-tutus-blue/80 mb-2">Please transfer exactly <span className="font-black text-tutus-blue text-sm">Rp{totalPrice().toLocaleString('id-ID')}</span></p>
+              <label className="flex items-center gap-3 cursor-pointer bg-white px-6 py-3 rounded-xl border-2 border-tutus-blue/10 shadow-sm w-full justify-center hover:border-tutus-blue transition-colors">
+                <input type="checkbox" required className="accent-tutus-blue w-5 h-5 cursor-pointer" />
+                <span className="font-bold text-xs uppercase tracking-widest">I have paid ♡</span>
+              </label>
+            </div>
+          )}
+
+          {formData.paymentMethod === 'transfer' && (
+            <div className="flex flex-col gap-3 mt-4 bg-tutus-yellow/20 p-6 rounded-2xl border-2 border-tutus-yellow items-center text-center animate-in fade-in zoom-in-95">
+              <p className="font-black uppercase tracking-widest text-xs">Bank Transfer Details</p>
+              
+              <div className="bg-white px-8 py-6 rounded-2xl border-2 border-tutus-blue text-center mb-1 shadow-sm w-full">
+                <p className="text-xs font-bold text-tutus-blue/50 uppercase tracking-widest mb-1">BCA</p>
+                <p className="font-black text-3xl tracking-widest mb-1">1234 5678 90</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-tutus-blue/80">a.n. Tutu's Studio</p>
+              </div>
+              
+              <p className="text-xs font-bold text-tutus-blue/80 mb-2">Please transfer exactly <span className="font-black text-tutus-blue text-sm">Rp{totalPrice().toLocaleString('id-ID')}</span></p>
+              <label className="flex items-center gap-3 cursor-pointer bg-white px-6 py-3 rounded-xl border-2 border-tutus-blue/10 shadow-sm w-full justify-center hover:border-tutus-blue transition-colors">
+                <input type="checkbox" required className="accent-tutus-blue w-5 h-5 cursor-pointer" />
+                <span className="font-bold text-xs uppercase tracking-widest">I have paid ♡</span>
+              </label>
+            </div>
+          )}
+          {/* ----------------------------------------------- */}
+
           <div className="border-t-2 border-tutus-blue/20 pt-6 mt-8 bg-tutus-yellow/10 p-6 rounded-2xl">
             <h2 className="tracking-widest uppercase text-xs text-tutus-blue/70 mb-4">Your Order</h2>
             <div className="space-y-3 mb-6">

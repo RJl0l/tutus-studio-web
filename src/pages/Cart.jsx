@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useCartStore } from '../store';
+import { CountUp } from '../fx';
 
 export default function Cart() {
   const { cart, updateQuantity, totalPrice } = useCartStore();
@@ -25,15 +26,18 @@ export default function Cart() {
       <div className="flex flex-col gap-4 mb-12">
         {cart.map(item => (
           <div key={item.id} className="flex flex-col sm:flex-row sm:items-center justify-between border-2 border-tutus-blue/10 bg-tutus-paper p-6 rounded-2xl group">
-            <div className="mb-4 sm:mb-0">
-              <h3 className="font-black text-xl mb-1">{item.name}</h3>
-              <p className="font-bold text-sm text-tutus-blue/60">Rp{item.price.toLocaleString('id-ID')}</p>
+            <div className="mb-4 sm:mb-0 flex items-center gap-4">
+              <span className="w-14 h-14 shrink-0 rounded-2xl bg-tutus-yellow/40 border-2 border-tutus-blue/10 flex items-center justify-center text-3xl transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110">{item.emoji}</span>
+              <div>
+                <h3 className="font-black text-xl mb-1">{item.name}</h3>
+                <p className="font-bold text-sm text-tutus-blue/60">Rp{item.price.toLocaleString('id-ID')} · Rp{(item.price * item.qty).toLocaleString('id-ID')}</p>
+              </div>
             </div>
             
             <div className="flex items-center gap-6 font-bold text-lg bg-tutus-cream border-2 border-tutus-blue/10 rounded-full px-2 py-1">
-              <button onClick={() => updateQuantity(item.id, -1)} className="w-8 h-8 flex items-center justify-center hover:bg-tutus-blue/10 rounded-full transition-colors active:scale-95">-</button>
-              <span className="w-4 text-center">{item.qty}</span>
-              <button onClick={() => updateQuantity(item.id, 1)} className="w-8 h-8 flex items-center justify-center hover:bg-tutus-blue/10 rounded-full transition-colors active:scale-95">+</button>
+              <button onClick={() => updateQuantity(item.id, -1)} className="w-8 h-8 flex items-center justify-center hover:bg-tutus-blue hover:text-white rounded-full transition-colors active:scale-90">-</button>
+              <span key={item.qty} className="w-4 text-center pop">{item.qty}</span>
+              <button onClick={() => updateQuantity(item.id, 1)} className="w-8 h-8 flex items-center justify-center hover:bg-tutus-blue hover:text-white rounded-full transition-colors active:scale-90">+</button>
             </div>
           </div>
         ))}
@@ -42,7 +46,7 @@ export default function Cart() {
       <div className="flex flex-col sm:flex-row items-center justify-between border-2 border-tutus-blue/10 p-6 sm:p-8 bg-tutus-yellow/20 rounded-[2rem]">
         <div className="flex flex-col w-full sm:w-auto mb-6 sm:mb-0 text-center sm:text-left">
           <span className="font-bold text-xs tracking-widest uppercase text-tutus-blue/60 mb-1">Total Balance</span>
-          <span className="font-black text-3xl">Rp{totalPrice().toLocaleString('id-ID')}</span>
+          <span className="font-black text-3xl">Rp<CountUp value={totalPrice()} /></span>
         </div>
         
         {/* Adjusted to stack perfectly on mobile */}

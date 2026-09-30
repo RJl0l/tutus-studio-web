@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import { Confetti } from '../fx';
 
 export default function Success() {
   const location = useLocation();
@@ -12,9 +13,9 @@ export default function Success() {
 
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center animate-in zoom-in duration-700 text-center px-4">
-      
+      <Confetti />
       <div className="border-2 border-tutus-blue p-12 bg-tutus-paper shadow-xl rounded-[3rem] max-w-lg w-full">
-        <div className="text-6xl mb-6">💌</div>
+        <div className="text-6xl mb-6 inline-block floaty">💌</div>
         
         <h1 className="font-black text-4xl mb-2">Order Sent!</h1>
         <p className="font-bold text-sm tracking-widest uppercase text-tutus-blue/60 mb-6">ID: {orderId}</p>

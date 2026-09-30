@@ -2,10 +2,10 @@ import { useCartStore } from '../store';
 import { flyToCart } from '../fx';
 
 const products = [
-  { id: 'regal', name: 'OG Chocolate', price: 25000, desc: 'white choc-walnut', code: 'ITM-01', emoji: '🍪', isSoldOut: false },
-  { id: 'matcha', name: 'Red Velvet', price: 28000, desc: 'cream cheese core', code: 'ITM-02', emoji: '🍰', isSoldOut: false },
-  { id: 'matcha-balls', name: 'Biscoff Crunch', price: 20000, desc: 'white choc + biscuit', code: 'ITM-03', emoji: '🥨', isSoldOut: false },
-  { id: 'coffee', name: 'Oreo Matcha', price: 22000, desc: 'stuffed with oreo', code: 'ITM-04', emoji: '🍵', isSoldOut: false } // <-- Set to true to test the sold-out state!
+  { id: 'regal', name: 'Regal Cookie Cup', price: 10000, desc: 'Regal in a dough', code: 'ITM-01', emoji: '🍪', isSoldOut: false },
+  { id: 'matcha', name: 'Matcha Cookie Cup', price: 11000, desc: 'Matcha dough with the sweetness of you', code: 'ITM-02', emoji: '🍰', isSoldOut: false },
+  { id: 'matcha-balls', name: 'Matcha Cookie Balls', price: 12000, desc: 'Matcha + biscuit + chocolate', code: 'ITM-03', emoji: '🥨', isSoldOut: false },
+  { id: 'coffee', name: 'Coffee Cookie Cup', price: 12000, desc: 'stuffed with coffee', code: 'ITM-04', emoji: '🍵', isSoldOut: false } // <-- Set to true to test the sold-out state!
 ];
 
 const ticker = ['MADE TO BE OBSESSED', "We're going to make you happy", 'Magical Taste.'];

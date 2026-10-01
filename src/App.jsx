@@ -10,6 +10,14 @@ import Success from './pages/Success';
 export default function App() {
   const totalItems = useCartStore(state => state.totalItems());
   const [isBumping, setIsBumping] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   // Trigger the animation whenever a new item drops into the bag
   useEffect(() => {
@@ -23,10 +31,10 @@ export default function App() {
     <BrowserRouter>
       <div className="min-h-screen flex flex-col font-sans">
         
-        <header className="border-b-2 border-tutus-blue/10 sticky top-0 bg-tutus-cream/90 backdrop-blur-md z-50">
-          <div className="max-w-5xl mx-auto px-6 h-20 flex items-center justify-between">
-            <Link to="/" className="flex items-center gap-3">
-              <span className="text-3xl">🐱</span>
+        <header className={`border-b-2 border-tutus-blue/10 sticky top-0 bg-tutus-cream/80 backdrop-blur-xl z-50 transition-shadow duration-300 ${scrolled ? 'shadow-[0_10px_30px_-14px_rgba(34,72,156,0.35)]' : ''}`}>
+          <div className={`max-w-5xl mx-auto px-6 ${scrolled ? 'h-16' : 'h-20'} transition-[height] duration-300 flex items-center justify-between`}>
+            <Link to="/" className="flex items-center gap-3 group">
+              <span className="text-3xl inline-block transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-125">🐱</span>
               <div className="flex flex-col">
                 <span className="font-black text-xl tracking-tight uppercase leading-none">Tutu's Studio</span>
                 <span className="font-medium text-xs text-tutus-blue/60">MADE TO BE OBSESSED</span>
@@ -43,7 +51,7 @@ export default function App() {
                 <span className="font-bold text-sm uppercase hidden sm:block">
                   Your Bag
                 </span>
-                <div className="relative">
+                <div className="relative" id="bag-icon">
                   <ShoppingBag size={20} className="text-tutus-blue" />
                   {totalItems > 0 && (
                     <span className={`absolute -top-2 -right-3 font-bold text-[10px] bg-tutus-yellow text-tutus-blue w-5 h-5 flex items-center justify-center rounded-full border border-tutus-blue shadow-sm transition-transform duration-300 ${isBumping ? 'scale-150 rotate-12' : 'scale-100'}`}>
